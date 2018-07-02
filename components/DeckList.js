@@ -1,11 +1,21 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, FlatList, TouchableOpacity } from "react-native";
 
 export default class DeckList extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>DeckList</Text>
+        <Text />
+        <FlatList //https://facebook.github.io/react-native/docs/flatlist
+          data={[{ key: "Coolest Deck" }, { key: "Lame Deck" }]}
+          renderItem={({ item }) => (
+            <TouchableOpacity style={{ alignItems: "center", paddingTop: 14, paddingBottom: 14 }}>
+              <Text>{item.key}</Text>
+              <Text>4 cards</Text>
+            </TouchableOpacity>
+            // https://facebook.github.io/react-native/docs/touchableopacity.html
+          )}
+        />
       </View>
     );
   }
