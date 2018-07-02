@@ -1,8 +1,9 @@
 import React from "react";
-import { StyleSheet, Text, View, StatusBar } from "react-native";
+import { View, StatusBar } from "react-native";
 import { createBottomTabNavigator, BottomTabBar } from "react-navigation";
 import { Constants } from "expo";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { darkestFoam, lightestFoam, midFoam } from "./utils/colors";
 
 // Components
 import DeckList from "./components/DeckList";
@@ -21,13 +22,11 @@ export default class App extends React.Component {
 
 function MobileStatusBar() {
   return (
-    <View style={{ backgroundColor: "#006743", height: Constants.statusBarHeight }}>
+    <View style={{ backgroundColor: darkestFoam, height: Constants.statusBarHeight }}>
       <StatusBar translucent barStyle="light-content" />
     </View>
   );
 }
-
-const TabBarComponent = props => <BottomTabBar {...props} />;
 
 const Tabs = createBottomTabNavigator(
   {
@@ -58,20 +57,11 @@ const Tabs = createBottomTabNavigator(
       }
     }),
     tabBarOptions: {
-      activeTintColor: "#006743",
-      inactiveTintColor: "#1AB981",
+      activeTintColor: darkestFoam,
+      inactiveTintColor: midFoam,
       tabStyle: {
-        backgroundColor: "#C6F7E6"
+        backgroundColor: lightestFoam
       }
     }
   }
 );
-
-// .color-primary-0 { color: #00A66C }	/* Main Primary color */
-// .color-primary-1 { color: #3FC294 } /* Lightest */
-// .color-primary-2 { color: #1AB981 }
-// .color-primary-3 { color: #008456 }
-// .color-primary-4 { color: #006743 } /* Darkest */
-// http://www.paletton.com/#uid=1360u0kA8v8l-DBrxAfCBoKHJji
-
-// New white #C6F7E6
