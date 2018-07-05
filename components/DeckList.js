@@ -1,7 +1,13 @@
 import React from "react";
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from "react-native";
+import { connect } from "react-redux";
 
-export default class DeckList extends React.Component {
+// Actions
+import { getDecks } from "../reducers/decks/actions";
+
+class DeckList extends React.Component {
+  componentDidMount() {}
+
   render() {
     return (
       <View style={styles.container}>
@@ -29,3 +35,16 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   }
 });
+
+const mapStateToProps = ({ decks }) => ({
+  decks
+});
+
+const mapDispatchToProps = dispatch => ({
+  getDecks: () => dispatch(getDecks())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DeckList);
