@@ -4,18 +4,25 @@ import { createBottomTabNavigator, createStackNavigator } from "react-navigation
 import { Constants } from "expo";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { lightestGray, midGray } from "./utils/colors";
-import { createStore, applyMiddleware } from "redux";
-import reducer from "./reducers";
+import { createStore, compose, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
+import reducer from "./reducers";
 import { Provider } from "react-redux";
+import { AsyncStorage } from "react-native";
 
 // Components
 import DeckList from "./components/DeckList";
 import Deck from "./components/Deck";
 import NewDeck from "./components/NewDeck";
 import DeckQuiz from "./components/DeckQuiz";
+import NewQuestion from "./components/NewQuestion";
 
-const store = createStore(reducer, applyMiddleware(thunk));
+const store = createStore(reducer, compose(applyMiddleware(thunk)));
+
+// AsyncStorage.setItem("decks", JSON.stringify([]));
+AsyncStorage.getItem("decks", (err, keys) => {
+  // console.log(keys);
+});
 
 export default class App extends React.Component {
   render() {
@@ -108,6 +115,17 @@ const Stack = createStackNavigator({
         backgroundColor: "black"
       },
       headerTintColor: "white"
+    })
+  },
+  NewQuestion: {
+    screen: NewQuestion,
+    navigationOptions: () => ({
+      headerStyle: {
+        backgroundColor: "black"
+      },
+      headerTintColor: "white",
+      headerBackTitle: `Deck`,
+      headerTruncatedBackTitle: "Back to Deck"
     })
   }
 });

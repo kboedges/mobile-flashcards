@@ -5,7 +5,7 @@ export default class NewQuestion extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>NewQuestion</Text>
+        <Text>New Question</Text>
       </View>
     );
   }

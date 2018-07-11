@@ -2,13 +2,18 @@ import React from "react";
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 import { midGray } from "../utils/colors";
+import { AsyncStorage } from "react-native";
 
 // Actions
 import { getDecks } from "../reducers/decks/actions";
 
 class DeckList extends React.Component {
   componentDidMount() {
-    getDecks();
+    this.props.getDecks();
+    // AsyncStorage.getItem("decks", (err, keys) => {
+    //   console.log(keys);
+    // });
+    // console.log("correct?", this.props.decks);
   }
 
   onPress = item => {

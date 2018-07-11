@@ -1,12 +1,24 @@
 import React from "react";
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, KeyboardAvoidingView } from "react-native";
 import { midGray } from "../utils/colors";
+import { connect } from "react-redux";
 
-export default class NewDeck extends React.Component {
+// Actions
+import { addDeck, getDecks } from "../reducers/decks/actions";
+
+class NewDeck extends React.Component {
   constructor(props) {
     super(props);
     this.state = { text: "" };
   }
+
+  onPress = newDeckTitle => {
+    this.props.addDeck(newDeckTitle);
+    this.props.getDecks();
+    // console.log(this.props.decks);
+    this.props.navigation.navigate("DeckList");
+    this.setState({ text: "" });
+  };
 
   render() {
     return (
@@ -19,7 +31,7 @@ export default class NewDeck extends React.Component {
           placeholder="Deck title"
           placeholderTextColor={midGray}
         />
-        <TouchableOpacity style={styles.button} onPress={this.onPress}>
+        <TouchableOpacity style={styles.button} onPress={() => this.onPress(this.state.text)}>
           <Text style={[styles.buttonText, { color: "white" }]}>Submit</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
@@ -65,3 +77,17 @@ const styles = StyleSheet.create({
     fontSize: 30
   }
 });
+
+const mapStateToProps = ({ decks }) => ({
+  decks
+});
+
+const mapDispatchToProps = dispatch => ({
+  addDeck: newDeckTitle => dispatch(addDeck(newDeckTitle)),
+  getDecks: () => dispatch(getDecks())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NewDeck);

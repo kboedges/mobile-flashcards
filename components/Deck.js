@@ -3,8 +3,12 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { midGray, lightestGray } from "../utils/colors";
 
 export default class Deck extends React.Component {
-  onPress = deck => {
+  startQuiz = deck => {
     this.props.navigation.navigate("DeckQuiz", { deck: deck });
+  };
+
+  addCard = () => {
+    this.props.navigation.navigate("NewQuestion");
   };
 
   render() {
@@ -16,14 +20,14 @@ export default class Deck extends React.Component {
         <View style={{ alignItems: "center" }}>
           <Text style={styles.deckTitle}>{deck.title}</Text>
           <Text style={styles.deckCardNum}>
-            {deck.questions.length} {deck.questions.length === 1 ? "Card" : "Cards"}
+            {deck.questions.length} {deck.questions.length === 1 ? "card" : "cards"}
           </Text>
         </View>
         <View>
-          <TouchableOpacity style={styles.buttonOutline} onPress={this.onPress}>
+          <TouchableOpacity style={styles.buttonOutline} onPress={this.addCard}>
             <Text style={[styles.buttonText, { color: "black" }]}>Add Card</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={() => this.onPress(deck)}>
+          <TouchableOpacity style={styles.button} onPress={() => this.startQuiz(deck)}>
             <Text style={[styles.buttonText, { color: "#fff" }]}>Start Quiz</Text>
           </TouchableOpacity>
         </View>
