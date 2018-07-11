@@ -86,7 +86,10 @@ const Stack = createStackNavigator({
   Deck: {
     screen: Deck,
     navigationOptions: () => ({
-      title: "This Deck"
+      headerStyle: {
+        backgroundColor: darkestFoam
+      },
+      headerTintColor: "#fff"
     })
   }
 });
