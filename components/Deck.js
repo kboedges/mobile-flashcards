@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { darkestFoam, midFoam, lightestFoam } from "../utils/colors";
+import { midGray, lightestGray } from "../utils/colors";
 
 export default class Deck extends React.Component {
-  onPress = () => {
-    console.log("hello");
+  onPress = deck => {
+    this.props.navigation.navigate("DeckQuiz", { deck: deck });
   };
 
   render() {
@@ -21,9 +21,9 @@ export default class Deck extends React.Component {
         </View>
         <View>
           <TouchableOpacity style={styles.buttonOutline} onPress={this.onPress}>
-            <Text style={[styles.buttonText, { color: darkestFoam }]}>Add Card</Text>
+            <Text style={[styles.buttonText, { color: "black" }]}>Add Card</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.onPress}>
+          <TouchableOpacity style={styles.button} onPress={() => this.onPress(deck)}>
             <Text style={[styles.buttonText, { color: "#fff" }]}>Start Quiz</Text>
           </TouchableOpacity>
         </View>
@@ -40,34 +40,34 @@ const styles = StyleSheet.create({
     justifyContent: "space-around"
   },
   deckTitle: {
-    fontSize: 40,
+    fontSize: 45,
     paddingBottom: 10,
-    color: darkestFoam
+    color: "black"
   },
   deckCardNum: {
-    color: midFoam,
-    fontSize: 25,
+    color: midGray,
+    fontSize: 30,
     paddingBottom: 10
   },
   button: {
     borderRadius: 5,
-    backgroundColor: darkestFoam,
-    paddingRight: 20,
-    paddingLeft: 20,
-    paddingTop: 5,
-    paddingBottom: 5,
+    backgroundColor: "black",
+    paddingRight: 30,
+    paddingLeft: 30,
+    paddingTop: 10,
+    paddingBottom: 10,
     marginBottom: 20
   },
   buttonOutline: {
     borderRadius: 5,
-    backgroundColor: lightestFoam,
-    paddingRight: 20,
-    paddingLeft: 20,
-    paddingTop: 5,
-    paddingBottom: 5,
+    backgroundColor: lightestGray,
+    paddingRight: 30,
+    paddingLeft: 30,
+    paddingTop: 10,
+    paddingBottom: 10,
     marginBottom: 10
   },
   buttonText: {
-    fontSize: 25
+    fontSize: 30
   }
 });

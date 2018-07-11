@@ -3,7 +3,7 @@ import { View, StatusBar } from "react-native";
 import { createBottomTabNavigator, createStackNavigator } from "react-navigation";
 import { Constants } from "expo";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { darkestFoam, lightestFoam, midFoam } from "./utils/colors";
+import { lightestGray, midGray } from "./utils/colors";
 import { createStore, applyMiddleware } from "redux";
 import reducer from "./reducers";
 import thunk from "redux-thunk";
@@ -13,6 +13,7 @@ import { Provider } from "react-redux";
 import DeckList from "./components/DeckList";
 import Deck from "./components/Deck";
 import NewDeck from "./components/NewDeck";
+import DeckQuiz from "./components/DeckQuiz";
 
 const store = createStore(reducer, applyMiddleware(thunk));
 
@@ -31,7 +32,7 @@ export default class App extends React.Component {
 
 function MobileStatusBar() {
   return (
-    <View style={{ backgroundColor: darkestFoam, height: Constants.statusBarHeight }}>
+    <View style={{ backgroundColor: "black", height: Constants.statusBarHeight }}>
       <StatusBar translucent barStyle="light-content" />
     </View>
   );
@@ -66,10 +67,16 @@ const Tabs = createBottomTabNavigator(
       }
     }),
     tabBarOptions: {
-      activeTintColor: darkestFoam,
-      inactiveTintColor: midFoam,
+      activeTintColor: "white",
+      inactiveTintColor: "white",
       tabStyle: {
-        backgroundColor: lightestFoam
+        backgroundColor: midGray
+      },
+      labelStyle: {
+        fontSize: 14
+      },
+      style: {
+        height: 55
       }
     }
   }
@@ -85,11 +92,22 @@ const Stack = createStackNavigator({
   },
   Deck: {
     screen: Deck,
+    navigationOptions: ({ navigation }) => ({
+      headerStyle: {
+        backgroundColor: "black"
+      },
+      headerTintColor: "white",
+      headerBackTitle: `${navigation.getParam("deck", "Deck").title} Deck`,
+      headerTruncatedBackTitle: "Back to Deck"
+    })
+  },
+  DeckQuiz: {
+    screen: DeckQuiz,
     navigationOptions: () => ({
       headerStyle: {
-        backgroundColor: darkestFoam
+        backgroundColor: "black"
       },
-      headerTintColor: "#fff"
+      headerTintColor: "white"
     })
   }
 });
