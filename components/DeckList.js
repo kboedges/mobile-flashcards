@@ -50,12 +50,13 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1
   },
   deckTitle: {
-    fontSize: 20,
+    fontSize: 30,
     paddingBottom: 10,
     color: midFoam
   },
   deckCardNum: {
-    color: darkestFoam
+    color: darkestFoam,
+    fontSize: 20
   }
 });
 
