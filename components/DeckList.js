@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
+import { darkestFoam, lightestFoam, midFoam } from "../utils/colors";
 
 // Actions
 import { getDecks } from "../reducers/decks/actions";
@@ -17,14 +18,13 @@ class DeckList extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Text />
         <FlatList
           data={this.props.decks}
           keyExtractor={this.keyExtractor}
           renderItem={({ item }) => (
-            <TouchableOpacity key={item.key} style={{ alignItems: "center", paddingTop: 14, paddingBottom: 14 }}>
-              <Text>{item.title}</Text>
-              <Text>
+            <TouchableOpacity key={item.key} style={styles.deckButton}>
+              <Text style={styles.deckTitle}>{item.title}</Text>
+              <Text style={styles.deckCardNum}>
                 {item.questions.length} {item.questions.length === 1 ? "Card" : "Cards"}
               </Text>
             </TouchableOpacity>
@@ -39,8 +39,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
+    alignItems: "stretch",
     justifyContent: "center"
+  },
+  deckButton: {
+    alignItems: "center",
+    paddingTop: 40,
+    paddingBottom: 40,
+    borderColor: darkestFoam,
+    borderBottomWidth: 1
+  },
+  deckTitle: {
+    fontSize: 20,
+    paddingBottom: 10,
+    color: midFoam
+  },
+  deckCardNum: {
+    color: darkestFoam
   }
 });
 
