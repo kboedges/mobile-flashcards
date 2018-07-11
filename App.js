@@ -1,17 +1,17 @@
 import React from "react";
-import { AsyncStorage } from "react-native";
 import { View, StatusBar } from "react-native";
-import { createBottomTabNavigator, BottomTabBar } from "react-navigation";
+import { createBottomTabNavigator, createStackNavigator } from "react-navigation";
 import { Constants } from "expo";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { darkestFoam, lightestFoam, midFoam } from "./utils/colors";
-import { createStore, applyMiddleware, compose } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import reducer from "./reducers";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
 
 // Components
 import DeckList from "./components/DeckList";
+import Deck from "./components/Deck";
 import NewDeck from "./components/NewDeck";
 
 const store = createStore(reducer, applyMiddleware(thunk));
@@ -22,7 +22,7 @@ export default class App extends React.Component {
       <Provider store={store}>
         <View style={{ flex: 1 }}>
           <MobileStatusBar />
-          <Tabs />
+          <Stack />
         </View>
       </Provider>
     );
@@ -74,3 +74,12 @@ const Tabs = createBottomTabNavigator(
     }
   }
 );
+
+const Stack = createStackNavigator({
+  Tabs: {
+    screen: Tabs
+  },
+  Deck: {
+    screen: Deck
+  }
+});

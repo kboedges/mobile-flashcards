@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
-import { darkestFoam, lightestFoam, midFoam } from "../utils/colors";
+import { darkestFoam, midFoam } from "../utils/colors";
 
 // Actions
 import { getDecks } from "../reducers/decks/actions";
@@ -22,7 +22,7 @@ class DeckList extends React.Component {
           data={this.props.decks}
           keyExtractor={this.keyExtractor}
           renderItem={({ item }) => (
-            <TouchableOpacity key={item.key} style={styles.deckButton}>
+            <TouchableOpacity key={item.key} style={styles.deckButton} onPress={() => navigation.navigate("Dashboard")}>
               <Text style={styles.deckTitle}>{item.title}</Text>
               <Text style={styles.deckCardNum}>
                 {item.questions.length} {item.questions.length === 1 ? "Card" : "Cards"}
