@@ -1,13 +1,14 @@
 import { AsyncStorage } from "react-native";
 import { SET_DECKS } from "../actionTypes";
 
-export const FLASHCARDS_STORAGE_KEY = "flashcards";
+export const FLASHCARDS_STORAGE_KEY = "decks";
 
 export function getDecks() {
-  return AsyncStorage.getAllKeys()
-    .then(res => res.json())
-    .catch(error => console.error("Error:", error))
-    .then(decks => dispatch(setDecks(decks)));
+  return AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY, (err, results) => {
+    // console.log("Working", results);
+    // console.log("Error", err);
+    setDecks(results);
+  });
 }
 
 export function setDecks(decks) {

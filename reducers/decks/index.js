@@ -1,7 +1,7 @@
 import { SET_DECKS } from "../actionTypes";
 
-const initialState = {
-  React: {
+const initialState = [
+  {
     title: "React",
     questions: [
       {
@@ -14,7 +14,7 @@ const initialState = {
       }
     ]
   },
-  JavaScript: {
+  {
     title: "JavaScript",
     questions: [
       {
@@ -23,7 +23,7 @@ const initialState = {
       }
     ]
   }
-};
+];
 
 export default (state = initialState, action) => {
   switch (action.type) {

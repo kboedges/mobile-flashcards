@@ -6,20 +6,28 @@ import { connect } from "react-redux";
 import { getDecks } from "../reducers/decks/actions";
 
 class DeckList extends React.Component {
-  componentDidMount() {}
+  componentDidMount() {
+    getDecks();
+  }
+
+  keyExtractor = item => item.title;
 
   render() {
+    console.log(this.props.decks);
+
     return (
       <View style={styles.container}>
         <Text />
-        <FlatList //https://facebook.github.io/react-native/docs/flatlist
-          data={[{ key: "Coolest Deck" }, { key: "Lame Deck" }]}
+        <FlatList
+          data={this.props.decks}
+          keyExtractor={this.keyExtractor}
           renderItem={({ item }) => (
-            <TouchableOpacity style={{ alignItems: "center", paddingTop: 14, paddingBottom: 14 }}>
-              <Text>{item.key}</Text>
-              <Text>4 cards</Text>
+            <TouchableOpacity key={item.key} style={{ alignItems: "center", paddingTop: 14, paddingBottom: 14 }}>
+              <Text>{item.title}</Text>
+              <Text>
+                {item.questions.length} {item.questions.length === 1 ? "Card" : "Cards"}
+              </Text>
             </TouchableOpacity>
-            // https://facebook.github.io/react-native/docs/touchableopacity.html
           )}
         />
       </View>
