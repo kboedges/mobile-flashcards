@@ -5,8 +5,9 @@ export const FLASHCARDS_STORAGE_KEY = "decks";
 
 export function getDecks() {
   return AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY, (err, results) => {
-    // console.log("Working", results);
-    // console.log("Error", err);
+    if (err) {
+      console.log("Error", err);
+    }
     setDecks(results);
   });
 }

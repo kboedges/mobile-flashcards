@@ -24,7 +24,7 @@ export default class Deck extends React.Component {
             <Text style={[styles.buttonText, { color: darkestFoam }]}>Add Card</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={this.onPress}>
-            <Text style={[styles.buttonText, { color: lightestFoam }]}>Start Quiz</Text>
+            <Text style={[styles.buttonText, { color: "#fff" }]}>Start Quiz</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -42,10 +42,10 @@ const styles = StyleSheet.create({
   deckTitle: {
     fontSize: 40,
     paddingBottom: 10,
-    color: midFoam
+    color: darkestFoam
   },
   deckCardNum: {
-    color: darkestFoam,
+    color: midFoam,
     fontSize: 25,
     paddingBottom: 10
   },

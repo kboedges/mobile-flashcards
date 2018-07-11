@@ -52,10 +52,10 @@ const styles = StyleSheet.create({
   deckTitle: {
     fontSize: 30,
     paddingBottom: 10,
-    color: midFoam
+    color: darkestFoam
   },
   deckCardNum: {
-    color: darkestFoam,
+    color: midFoam,
     fontSize: 20
   }
 });
