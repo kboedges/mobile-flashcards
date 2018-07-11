@@ -32,7 +32,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "space-around"
+    justifyContent: "space-around",
+    paddingLeft: 10,
+    paddingRight: 10
   },
   textInput: {
     height: 40,
@@ -41,13 +43,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: midGray,
     alignSelf: "stretch",
-    marginLeft: 10,
-    marginRight: 10,
     paddingLeft: 10,
     paddingRight: 10
   },
   title: {
-    fontSize: 45,
+    fontSize: 40,
     paddingBottom: 10,
     color: "black",
     textAlign: "center"
