@@ -11,18 +11,18 @@ class DeckList extends React.Component {
     getDecks();
   }
 
-  keyExtractor = item => item.title;
-
   render() {
-    console.log(this.props.decks);
-
     return (
       <View style={styles.container}>
         <FlatList
           data={this.props.decks}
-          keyExtractor={this.keyExtractor}
+          keyExtractor={item => item.title}
           renderItem={({ item }) => (
-            <TouchableOpacity key={item.key} style={styles.deckButton} onPress={() => navigation.navigate("Dashboard")}>
+            <TouchableOpacity
+              key={item.key}
+              style={styles.deckButton}
+              onPress={() => this.props.navigation.navigate("Deck", { deck: item })}
+            >
               <Text style={styles.deckTitle}>{item.title}</Text>
               <Text style={styles.deckCardNum}>
                 {item.questions.length} {item.questions.length === 1 ? "Card" : "Cards"}

@@ -77,9 +77,16 @@ const Tabs = createBottomTabNavigator(
 
 const Stack = createStackNavigator({
   Tabs: {
-    screen: Tabs
+    screen: Tabs,
+    navigationOptions: () => ({
+      header: null,
+      headerBackTitle: "My Decks"
+    })
   },
   Deck: {
-    screen: Deck
+    screen: Deck,
+    navigationOptions: () => ({
+      title: "This Deck"
+    })
   }
 });
