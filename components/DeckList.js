@@ -2,7 +2,6 @@ import React from "react";
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 import { midGray } from "../utils/colors";
-import { AsyncStorage } from "react-native";
 
 // Actions
 import { getDecks } from "../reducers/decks/actions";
@@ -10,10 +9,6 @@ import { getDecks } from "../reducers/decks/actions";
 class DeckList extends React.Component {
   componentDidMount() {
     this.props.getDecks();
-    // AsyncStorage.getItem("decks", (err, keys) => {
-    //   console.log(keys);
-    // });
-    // console.log("correct?", this.props.decks);
   }
 
   onPress = item => {
@@ -21,10 +16,11 @@ class DeckList extends React.Component {
   };
 
   render() {
+    console.log("what is this", this.props.decks);
     return (
       <View style={styles.container}>
         <FlatList
-          data={this.props.decks}
+          data={this.props.decks.list}
           keyExtractor={item => item.title}
           renderItem={({ item }) => (
             <TouchableOpacity key={item.key} style={styles.deckButton} onPress={() => this.onPress(item)}>

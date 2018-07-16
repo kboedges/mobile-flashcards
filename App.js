@@ -19,12 +19,19 @@ import NewQuestion from "./components/NewQuestion";
 
 const store = createStore(reducer, compose(applyMiddleware(thunk)));
 
-// AsyncStorage.setItem("decks", JSON.stringify([]));
-AsyncStorage.getItem("decks", (err, keys) => {
-  // console.log(keys);
-});
+// AsyncStorage.removeItem("decks");
 
 export default class App extends React.Component {
+  componentDidMount() {
+    AsyncStorage.getItem("decks")
+      .then(JSON.parse)
+      .then(data => {
+        if (data === null) {
+          AsyncStorage.setItem("decks", JSON.stringify({ list: [] }));
+        }
+      });
+  }
+
   render() {
     return (
       <Provider store={store}>

@@ -15,7 +15,6 @@ class NewDeck extends React.Component {
   onPress = newDeckTitle => {
     this.props.addDeck(newDeckTitle);
     this.props.getDecks();
-    // console.log(this.props.decks);
     this.props.navigation.navigate("DeckList");
     this.setState({ text: "" });
   };

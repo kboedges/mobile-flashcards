@@ -5,12 +5,15 @@ export const SET_DECKS = "SET_DECKS";
 export const FLASHCARDS_STORAGE_KEY = "decks";
 
 export function getDecks() {
-  return AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY, (err, results) => {
-    if (err) {
-      console.log("Error", err);
-    }
-    setDecks(results);
-  });
+  return dispatch =>
+    AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY, (err, results) => {
+      if (err) {
+        console.log("Error", err);
+      }
+      return results;
+    })
+      .then(JSON.parse)
+      .then(results => dispatch(setDecks(results)));
 }
 
 export function addDeck(newDeckTitle) {
@@ -19,11 +22,15 @@ export function addDeck(newDeckTitle) {
       if (err) {
         console.log("Error", err);
       }
-      let decks = JSON.parse(results);
-      decks.push({ title: newDeckTitle, questions: [] });
-      AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(decks));
-      () => setDecks(decks);
-    }).then(decks => dispatch(setDecks(decks)));
+      return results;
+    })
+      .then(results => {
+        const decks = JSON.parse(results);
+        decks.list.push({ title: newDeckTitle, questions: [] });
+        AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(decks));
+        return decks;
+      })
+      .then(decks => dispatch(setDecks(decks)));
 }
 
 function setDecks(decks) {
