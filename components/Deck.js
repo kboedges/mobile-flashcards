@@ -8,7 +8,9 @@ export default class Deck extends React.Component {
   };
 
   addCard = () => {
-    this.props.navigation.navigate("NewQuestion");
+    this.props.navigation.navigate("NewQuestion", {
+      deck: this.props.navigation.getParam("deck", "NO DECK")
+    });
   };
 
   render() {

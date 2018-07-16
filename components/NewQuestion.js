@@ -11,12 +11,15 @@ export default class NewQuestion extends React.Component {
     };
   }
 
-  // onPress = newDeckTitle => {
-  //   this.props.addDeck(newDeckTitle).then(this.props.navigation.navigate("DeckList"));
-  //   this.setState({ text: "" });
-  // };
+  onPress = () => {
+    // this.props.addDeck(newDeckTitle).then(this.props.navigation.navigate("DeckList"));
+    // this.setState({ text: "" });
+    console.log("submitted");
+  };
 
   render() {
+    console.log(this.props.deck);
+
     return (
       <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
         <TextInput
