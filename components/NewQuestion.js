@@ -2,6 +2,9 @@ import React from "react";
 import { midGray } from "../utils/colors";
 import { StyleSheet, Text, TextInput, TouchableOpacity, KeyboardAvoidingView } from "react-native";
 
+// Actions
+import { addQuestion } from "../reducers/decks/actions";
+
 export default class NewQuestion extends React.Component {
   constructor(props) {
     super(props);
@@ -12,9 +15,11 @@ export default class NewQuestion extends React.Component {
   }
 
   onPress = () => {
-    // this.props.addDeck(newDeckTitle).then(this.props.navigation.navigate("DeckList"));
-    // this.setState({ text: "" });
-    console.log("submitted");
+    this.props.addQuestion(this.props.deck.title, this.state).then(this.props.navigation.navigate("Deck"));
+    this.setState({
+      question: "",
+      answer: ""
+    });
   };
 
   render() {
@@ -82,3 +87,12 @@ const styles = StyleSheet.create({
     fontSize: 30
   }
 });
+
+const mapDispatchToProps = dispatch => ({
+  addQuestion: (deckTitle, questionInfo) => dispatch(addQuestion(deckTitle, questionInfo)),
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(NewQuestion);
