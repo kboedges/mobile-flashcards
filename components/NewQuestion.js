@@ -1,11 +1,12 @@
 import React from "react";
 import { midGray } from "../utils/colors";
+import { connect } from "react-redux";
 import { StyleSheet, Text, TextInput, TouchableOpacity, KeyboardAvoidingView } from "react-native";
 
 // Actions
 import { addQuestion } from "../reducers/decks/actions";
 
-export default class NewQuestion extends React.Component {
+class NewQuestion extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,7 +24,7 @@ export default class NewQuestion extends React.Component {
   };
 
   render() {
-    console.log(this.props.deck);
+    // console.log(this.props.deck);
 
     return (
       <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addQuestion: (deckTitle, questionInfo) => dispatch(addQuestion(deckTitle, questionInfo)),
+  addQuestion: (deckTitle, questionInfo) => dispatch(addQuestion(deckTitle, questionInfo))
 });
 
 export default connect(

@@ -4,7 +4,7 @@ import { midGray, lightestGray } from "../utils/colors";
 
 export default class Deck extends React.Component {
   startQuiz = deck => {
-    this.props.navigation.navigate("DeckQuiz", { deck: deck });
+    this.props.navigation.navigate("Question", { deck: deck, index: 0 });
   };
 
   addCard = () => {

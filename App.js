@@ -16,6 +16,9 @@ import Deck from "./components/Deck";
 import NewDeck from "./components/NewDeck";
 import DeckQuiz from "./components/DeckQuiz";
 import NewQuestion from "./components/NewQuestion";
+import Score from "./components/Score";
+import Question from "./components/Question";
+import Answer from "./components/Answer";
 
 const store = createStore(reducer, compose(applyMiddleware(thunk)));
 
@@ -27,7 +30,36 @@ export default class App extends React.Component {
       .then(JSON.parse)
       .then(data => {
         if (data === null) {
-          AsyncStorage.setItem("decks", JSON.stringify({ list: [] }));
+          AsyncStorage.setItem(
+            "decks",
+            JSON.stringify({
+              list: [
+                {
+                  title: "React",
+                  questions: [
+                    {
+                      question: "What is React?",
+                      answer: "A library for managing user interfaces"
+                    },
+                    {
+                      question: "Where do you make Ajax requests in React?",
+                      answer: "The componentDidMount lifecycle event"
+                    }
+                  ]
+                },
+                {
+                  title: "JavaScript",
+                  questions: [
+                    {
+                      question: "What is a closure?",
+                      answer:
+                        "The combination of a function and the lexical environment within which that function was declared."
+                    }
+                  ]
+                }
+              ]
+            })
+          );
         }
       });
   }
@@ -115,15 +147,6 @@ const Stack = createStackNavigator({
       headerTruncatedBackTitle: "Back to Deck"
     })
   },
-  DeckQuiz: {
-    screen: DeckQuiz,
-    navigationOptions: () => ({
-      headerStyle: {
-        backgroundColor: "black"
-      },
-      headerTintColor: "white"
-    })
-  },
   NewQuestion: {
     screen: NewQuestion,
     navigationOptions: () => ({
@@ -134,5 +157,14 @@ const Stack = createStackNavigator({
       headerBackTitle: `Deck`,
       headerTruncatedBackTitle: "Back to Deck"
     })
+  },
+  Score: {
+    screen: Score
+  },
+  Question: {
+    screen: Question
+  },
+  Answer: {
+    screen: Answer
   }
 });
