@@ -5,7 +5,8 @@ export default class Question extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      answerShowing: false
+      answerShowing: false,
+      correctAnswer: undefined
     };
   }
 
@@ -21,30 +22,17 @@ export default class Question extends React.Component {
     });
   };
 
-  showQuestionOrAnswer = () => {
-    this.state.answerShowing === false ? (
-      <View style={styles.groupedContainer}>
-        <Text style={styles.title}>{currentDeck.questions[index].question}</Text>
-        <TouchableOpacity onPress={this.toggleAnswer}>
-          <Text style={styles.link}>See Answer</Text>
-        </TouchableOpacity>
-      </View>
-    ) : (
-      <View style={styles.groupedContainer}>
-        <Text style={styles.title}>{currentDeck.questions[index].answer}</Text>
-        <TouchableOpacity onPress={this.toggleAnswer}>
-          <Text style={styles.link}>See Question</Text>
-        </TouchableOpacity>
-      </View>
-    );
+  tallyScore = answerState => {
+    this.setState({
+      correctAnswer: answerState
+    });
+    console.log(this.state.correctAnswer); // This is behind one round
   };
 
   render() {
     const { navigation } = this.props;
     const currentDeck = navigation.getParam("deck", "NO DECK");
     const index = navigation.getParam("index", 0);
-
-    console.log("currentDeck", currentDeck);
 
     return (
       <View style={styles.container}>
@@ -68,10 +56,14 @@ export default class Question extends React.Component {
 
             <View style={styles.groupedContainer}>
               <TouchableOpacity style={[styles.button, { backgroundColor: "green" }]}>
-                <Text style={[styles.buttonText, { color: "white" }]}>Correct</Text>
+                <Text style={[styles.buttonText, { color: "white" }]} onPress={() => this.tallyScore(true)}>
+                  Correct
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity style={[styles.button, { backgroundColor: "red" }]}>
-                <Text style={[styles.buttonText, { color: "white" }]}>Incorrect</Text>
+                <Text style={[styles.buttonText, { color: "white" }]} onPress={() => this.tallyScore(false)}>
+                  Incorrect
+                </Text>
               </TouchableOpacity>
             </View>
           </View>

@@ -1,7 +1,7 @@
 import React from "react";
 import { midGray } from "../utils/colors";
 import { connect } from "react-redux";
-import { StyleSheet, Text, TextInput, TouchableOpacity, KeyboardAvoidingView } from "react-native";
+import { View, StyleSheet, Text, TextInput, TouchableOpacity, KeyboardAvoidingView } from "react-native";
 
 // Actions
 import { addQuestion } from "../reducers/decks/actions";
@@ -24,8 +24,6 @@ class NewQuestion extends React.Component {
   };
 
   render() {
-    // console.log(this.props.deck);
-
     return (
       <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
         <TextInput
@@ -58,6 +56,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     paddingLeft: 10,
     paddingRight: 10
+  },
+  groupedContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center"
   },
   textInput: {
     height: 40,

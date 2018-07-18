@@ -16,7 +16,6 @@ class DeckList extends React.Component {
   };
 
   render() {
-    // console.log("what is this", this.props.decks);
     return (
       <View style={styles.container}>
         <FlatList
