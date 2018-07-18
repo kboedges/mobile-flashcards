@@ -15,6 +15,30 @@ export default class Question extends React.Component {
     }));
   };
 
+  addCard = () => {
+    this.props.navigation.navigate("NewQuestion", {
+      deck: this.props.navigation.getParam("deck", "NO DECK")
+    });
+  };
+
+  showQuestionOrAnswer = () => {
+    this.state.answerShowing === false ? (
+      <View style={styles.groupedContainer}>
+        <Text style={styles.title}>{currentDeck.questions[index].question}</Text>
+        <TouchableOpacity onPress={this.toggleAnswer}>
+          <Text style={styles.link}>See Answer</Text>
+        </TouchableOpacity>
+      </View>
+    ) : (
+      <View style={styles.groupedContainer}>
+        <Text style={styles.title}>{currentDeck.questions[index].answer}</Text>
+        <TouchableOpacity onPress={this.toggleAnswer}>
+          <Text style={styles.link}>See Question</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
   render() {
     const { navigation } = this.props;
     const currentDeck = navigation.getParam("deck", "NO DECK");
@@ -24,30 +48,43 @@ export default class Question extends React.Component {
 
     return (
       <View style={styles.container}>
-        {this.state.answerShowing === false ? (
-          <View style={styles.groupedContainer}>
-            <Text style={styles.title}>{currentDeck.questions[index].question}</Text>
-            <TouchableOpacity onPress={this.toggleAnswer}>
-              <Text style={styles.link}>See Answer</Text>
-            </TouchableOpacity>
+        {currentDeck.questions[index] !== undefined ? (
+          <View>
+            {this.state.answerShowing === false ? (
+              <View style={styles.groupedContainer}>
+                <Text style={styles.title}>{currentDeck.questions[index].question}</Text>
+                <TouchableOpacity onPress={this.toggleAnswer}>
+                  <Text style={styles.link}>See Answer</Text>
+                </TouchableOpacity>
+              </View>
+            ) : (
+              <View style={styles.groupedContainer}>
+                <Text style={styles.title}>{currentDeck.questions[index].answer}</Text>
+                <TouchableOpacity onPress={this.toggleAnswer}>
+                  <Text style={styles.link}>See Question</Text>
+                </TouchableOpacity>
+              </View>
+            )}
+
+            <View style={styles.groupedContainer}>
+              <TouchableOpacity style={[styles.button, { backgroundColor: "green" }]}>
+                <Text style={[styles.buttonText, { color: "white" }]}>Correct</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={[styles.button, { backgroundColor: "red" }]}>
+                <Text style={[styles.buttonText, { color: "white" }]}>Incorrect</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         ) : (
-          <View style={styles.groupedContainer}>
-            <Text style={styles.title}>{currentDeck.questions[index].answer}</Text>
-            <TouchableOpacity onPress={this.toggleAnswer}>
-              <Text style={styles.link}>See Question</Text>
+          <View style={styles.container}>
+            <Text style={styles.title}>There are no cards in this deck yet!</Text>
+            <TouchableOpacity style={styles.button}>
+              <Text style={[styles.buttonText, { color: "white" }]} onPress={this.addCard}>
+                Add Card
+              </Text>
             </TouchableOpacity>
           </View>
         )}
-
-        <View style={styles.groupedContainer}>
-          <TouchableOpacity style={[styles.button, { backgroundColor: "green" }]}>
-            <Text style={[styles.buttonText, { color: "white" }]}>Submit</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, { backgroundColor: "red" }]}>
-            <Text style={[styles.buttonText, { color: "white" }]}>Submit</Text>
-          </TouchableOpacity>
-        </View>
       </View>
     );
   }
@@ -67,6 +104,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center"
   },
+  noSpacingView: {
+    paddingBottom: 0,
+    paddingLeft: 0,
+    paddingRight: 0,
+    paddingTop: 0,
+    margin: 0
+  },
   title: {
     fontSize: 45,
     paddingBottom: 10,
@@ -75,7 +119,8 @@ const styles = StyleSheet.create({
   },
   link: {
     color: "red",
-    fontWeight: "bold"
+    fontWeight: "bold",
+    fontSize: 20
   },
   button: {
     borderRadius: 5,
@@ -84,9 +129,11 @@ const styles = StyleSheet.create({
     paddingLeft: 30,
     paddingTop: 10,
     paddingBottom: 10,
-    marginBottom: 20
+    marginBottom: 20,
+    width: 200
   },
   buttonText: {
-    fontSize: 30
+    fontSize: 30,
+    textAlign: "center"
   }
 });

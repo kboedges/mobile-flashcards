@@ -3,7 +3,6 @@ import { View, StatusBar } from "react-native";
 import { createBottomTabNavigator, createStackNavigator } from "react-navigation";
 import { Constants } from "expo";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { lightestGray, midGray } from "./utils/colors";
 import { createStore, compose, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import reducer from "./reducers";
@@ -14,7 +13,6 @@ import { AsyncStorage } from "react-native";
 import DeckList from "./components/DeckList";
 import Deck from "./components/Deck";
 import NewDeck from "./components/NewDeck";
-import DeckQuiz from "./components/DeckQuiz";
 import NewQuestion from "./components/NewQuestion";
 import Score from "./components/Score";
 import Question from "./components/Question";
@@ -116,7 +114,7 @@ const Tabs = createBottomTabNavigator(
       activeTintColor: "white",
       inactiveTintColor: "white",
       tabStyle: {
-        backgroundColor: midGray
+        backgroundColor: "black"
       },
       labelStyle: {
         fontSize: 14
@@ -162,9 +160,13 @@ const Stack = createStackNavigator({
     screen: Score
   },
   Question: {
-    screen: Question
-  },
-  Answer: {
-    screen: Answer
+    screen: Question,
+    navigationOptions: () => ({
+      headerStyle: {
+        backgroundColor: "black"
+      },
+      headerTintColor: "white",
+      headerBackTitle: "Back to Quiz"
+    })
   }
 });
