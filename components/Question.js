@@ -1,7 +1,11 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { connect } from "react-redux";
 
-export default class Question extends React.Component {
+// Actions
+import { tallyScore } from "../reducers/score/actions";
+
+class Question extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,11 +26,13 @@ export default class Question extends React.Component {
     });
   };
 
-  tallyScore = answerState => {
-    this.setState({
-      correctAnswer: answerState
-    });
-    console.log(this.state.correctAnswer); // This is behind one round
+  submitScore = answerState => {
+    this.props.tallyScore(answerState).then(
+      this.props.navigation.push("Question", {
+        deck: this.props.navigation.getParam("deck", "NO DECK"),
+        index: this.props.navigation.getParam("index", "NO DECK") + 1
+      })
+    );
   };
 
   render() {
@@ -56,12 +62,12 @@ export default class Question extends React.Component {
 
             <View style={styles.groupedContainer}>
               <TouchableOpacity style={[styles.button, { backgroundColor: "green" }]}>
-                <Text style={[styles.buttonText, { color: "white" }]} onPress={() => this.tallyScore(true)}>
+                <Text style={[styles.buttonText, { color: "white" }]} onPress={() => this.submitScore(true)}>
                   Correct
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity style={[styles.button, { backgroundColor: "red" }]}>
-                <Text style={[styles.buttonText, { color: "white" }]} onPress={() => this.tallyScore(false)}>
+                <Text style={[styles.buttonText, { color: "white" }]} onPress={() => this.submitScore(false)}>
                   Incorrect
                 </Text>
               </TouchableOpacity>
@@ -129,3 +135,12 @@ const styles = StyleSheet.create({
     textAlign: "center"
   }
 });
+
+const mapDispatchToProps = dispatch => ({
+  tallyScore: answerState => dispatch(tallyScore(answerState))
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Question);

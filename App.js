@@ -16,11 +16,11 @@ import NewDeck from "./components/NewDeck";
 import NewQuestion from "./components/NewQuestion";
 import Score from "./components/Score";
 import Question from "./components/Question";
-import Answer from "./components/Answer";
 
 const store = createStore(reducer, compose(applyMiddleware(thunk)));
 
 // AsyncStorage.removeItem("decks");
+// AsyncStorage.removeItem("score");
 
 export default class App extends React.Component {
   componentDidMount() {
@@ -56,6 +56,18 @@ export default class App extends React.Component {
                   ]
                 }
               ]
+            })
+          );
+        }
+      });
+    AsyncStorage.getItem("score")
+      .then(JSON.parse)
+      .then(data => {
+        if (data === null) {
+          AsyncStorage.setItem(
+            "score",
+            JSON.stringify({
+              score: 0
             })
           );
         }
