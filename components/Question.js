@@ -27,12 +27,19 @@ class Question extends React.Component {
   };
 
   submitScore = answerState => {
-    this.props.tallyScore(answerState).then(
-      this.props.navigation.push("Question", {
-        deck: this.props.navigation.getParam("deck", "NO DECK"),
-        index: this.props.navigation.getParam("index", "NO DECK") + 1
-      })
-    );
+    const deck = this.props.navigation.getParam("deck", "NO DECK");
+    const index = this.props.navigation.getParam("index", "no index");
+
+    this.props.tallyScore(answerState).then(() => {
+      if (deck.questions[index + 1] !== undefined) {
+        this.props.navigation.push("Question", {
+          deck: deck,
+          index: index + 1
+        });
+      } else {
+        this.props.navigation.push("Score");
+      }
+    });
   };
 
   render() {
@@ -61,15 +68,17 @@ class Question extends React.Component {
             )}
 
             <View style={styles.groupedContainer}>
-              <TouchableOpacity style={[styles.button, { backgroundColor: "green" }]}>
-                <Text style={[styles.buttonText, { color: "white" }]} onPress={() => this.submitScore(true)}>
-                  Correct
-                </Text>
+              <TouchableOpacity
+                style={[styles.button, { backgroundColor: "green" }]}
+                onPress={() => this.submitScore(true)}
+              >
+                <Text style={[styles.buttonText, { color: "white" }]}>Correct</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={[styles.button, { backgroundColor: "red" }]}>
-                <Text style={[styles.buttonText, { color: "white" }]} onPress={() => this.submitScore(false)}>
-                  Incorrect
-                </Text>
+              <TouchableOpacity
+                style={[styles.button, { backgroundColor: "red" }]}
+                onPress={() => this.submitScore(false)}
+              >
+                <Text style={[styles.buttonText, { color: "white" }]}>Incorrect</Text>
               </TouchableOpacity>
             </View>
           </View>

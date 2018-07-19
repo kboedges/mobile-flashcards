@@ -20,7 +20,7 @@ import Question from "./components/Question";
 const store = createStore(reducer, compose(applyMiddleware(thunk)));
 
 // AsyncStorage.removeItem("decks");
-// AsyncStorage.removeItem("score");
+AsyncStorage.removeItem("score");
 
 export default class App extends React.Component {
   componentDidMount() {

@@ -36,6 +36,18 @@ export function tallyScore(answerState) {
       .then(result => dispatch(setScore(result)));
 }
 
+export function clearScore() {
+  return dispatch =>
+    AsyncStorage.removeItem("score", (err, result) => {
+      if (err) {
+        console.log("Error", err);
+      }
+      return result;
+    })
+      .then(JSON.parse)
+      .then(result => dispatch(setScore(result)));
+}
+
 function setScore(score) {
   return {
     type: SET_SCORE,
