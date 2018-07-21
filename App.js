@@ -8,6 +8,7 @@ import thunk from "redux-thunk";
 import reducer from "./reducers";
 import { Provider } from "react-redux";
 import { AsyncStorage } from "react-native";
+import { setLocalNotification } from "./utils/helpers";
 
 // Components
 import DeckList from "./components/DeckList";
@@ -24,6 +25,7 @@ AsyncStorage.removeItem("score");
 
 export default class App extends React.Component {
   componentDidMount() {
+    setLocalNotification();
     AsyncStorage.getItem("decks")
       .then(JSON.parse)
       .then(data => {
