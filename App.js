@@ -45,8 +45,8 @@ export default class App extends React.Component {
                       answer: "Mobile flashcards of course!"
                     },
                     {
-                      question: "What creates the shadow of the moon?",
-                      answer: "The moon itself, NOT THE EARTH!"
+                      question: "What color is the sky (usually...)",
+                      answer: "Blue"
                     }
                   ]
                 }
