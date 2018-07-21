@@ -1,8 +1,9 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { midGray, lightestGray } from "../utils/colors";
+import { connect } from "react-redux";
 
-export default class Deck extends React.Component {
+class Deck extends React.Component {
   startQuiz = deck => {
     this.props.navigation.navigate("Question", { deck: deck, index: 0 });
   };
@@ -17,8 +18,9 @@ export default class Deck extends React.Component {
   };
 
   render() {
-    const { navigation } = this.props;
-    const deck = navigation.getParam("deck", "NO DECK");
+    const { navigation, decks } = this.props;
+    const navDeck = navigation.getParam("deck", "NO DECK");
+    const deck = decks.list.filter(item => item.title === navDeck.title)[0];
 
     return (
       <View style={styles.container}>
@@ -82,3 +84,16 @@ const styles = StyleSheet.create({
     fontSize: 30
   }
 });
+
+const mapStateToProps = ({ decks }) => ({
+  decks
+});
+
+const mapDispatchToProps = dispatch => ({
+  getDecks: () => dispatch(getDecks())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Deck);

@@ -33,16 +33,24 @@ export function addDeck(newDeckTitle) {
       .then(decks => dispatch(setDecks(decks)));
 }
 
-export function addQuestion(deckTitle, questionInfo) {
+export function addQuestion(deckTitle, questionInfo, decks) {
+  const list = decks.list.map(deck => {
+    if (deck.title === deckTitle) {
+      deck.questions.push(questionInfo);
+    }
+    return deck;
+  });
   return dispatch =>
-    AsyncStorage.mergeItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(questionInfo), (err, results) => {
-      if (err) {
-        console.log("Error", err);
-      }
-      return results;
-    })
-      .then(JSON.parse)
-      .then(results => dispatch(setDecks(results)));
+    AsyncStorage.mergeItem("decks", JSON.stringify({ list }), () => {
+      AsyncStorage.getItem("decks", (err, results) => {
+        if (err) {
+          console.log("Error", err);
+        }
+        return results;
+      })
+        .then(JSON.parse)
+        .then(results => dispatch(setDecks(results)));
+    });
 }
 
 function setDecks(decks) {

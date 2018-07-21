@@ -16,7 +16,9 @@ class NewQuestion extends React.Component {
   }
 
   onPress = () => {
-    this.props.addQuestion(this.props.deck.title, this.state).then(this.props.navigation.navigate("Deck"));
+    this.props
+      .addQuestion(this.props.navigation.getParam("deck", "NO DECK").title, this.state, this.props.decks)
+      .then(this.props.navigation.navigate("Deck"));
     this.setState({
       question: "",
       answer: ""
@@ -92,11 +94,15 @@ const styles = StyleSheet.create({
   }
 });
 
+const mapStateToProps = ({ decks }) => ({
+  decks
+});
+
 const mapDispatchToProps = dispatch => ({
-  addQuestion: (deckTitle, questionInfo) => dispatch(addQuestion(deckTitle, questionInfo))
+  addQuestion: (deckTitle, questionInfo, decks) => dispatch(addQuestion(deckTitle, questionInfo, decks))
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(NewQuestion);
