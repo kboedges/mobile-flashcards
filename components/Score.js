@@ -1,11 +1,16 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
+import { clearLocalNotification, setLocalNotification } from "../utils/helpers";
 
 // Actions
 import { clearScore } from "../reducers/score/actions";
 
 class Score extends React.Component {
+  componentDidMount() {
+    clearLocalNotification().then(setLocalNotification);
+  }
+
   navigateToDeck = () => {
     this.props.navigation.push("Tabs");
     this.props.clearScore();

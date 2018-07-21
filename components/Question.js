@@ -9,8 +9,7 @@ class Question extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      answerShowing: false,
-      correctAnswer: undefined
+      answerShowing: false
     };
   }
 
@@ -110,13 +109,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center"
-  },
-  noSpacingView: {
-    paddingBottom: 0,
-    paddingLeft: 0,
-    paddingRight: 0,
-    paddingTop: 0,
-    margin: 0
   },
   title: {
     fontSize: 45,

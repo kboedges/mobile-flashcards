@@ -1,10 +1,10 @@
 import { AsyncStorage } from "react-native";
-
 export const SET_SCORE = "SET_SCORE";
+export const SCORE_STORAGE_KEY = "score";
 
 export function getScore() {
   return dispatch =>
-    AsyncStorage.getItem("score", (err, result) => {
+    AsyncStorage.getItem(SCORE_STORAGE_KEY, (err, result) => {
       if (err) {
         console.log("Error", err);
       }
@@ -16,7 +16,7 @@ export function getScore() {
 
 export function tallyScore(answerState) {
   return dispatch =>
-    AsyncStorage.getItem("score", (err, result) => {
+    AsyncStorage.getItem(SCORE_STORAGE_KEY, (err, result) => {
       if (err) {
         console.log("Error", err);
       }
@@ -29,7 +29,7 @@ export function tallyScore(answerState) {
         } else if (answerState === false) {
           scoreObj.score;
         }
-        AsyncStorage.setItem("score", JSON.stringify(scoreObj));
+        AsyncStorage.setItem(SCORE_STORAGE_KEY, JSON.stringify(scoreObj));
         return scoreObj;
       })
       .then(result => dispatch(setScore(result)));
@@ -37,8 +37,8 @@ export function tallyScore(answerState) {
 
 export function clearScore() {
   return dispatch =>
-    AsyncStorage.mergeItem("score", JSON.stringify({ score: 0 }), () => {
-      AsyncStorage.getItem("score", (err, result) => {
+    AsyncStorage.mergeItem(SCORE_STORAGE_KEY, JSON.stringify({ score: 0 }), () => {
+      AsyncStorage.getItem(SCORE_STORAGE_KEY, (err, result) => {
         if (err) {
           console.log("Error", err);
         }

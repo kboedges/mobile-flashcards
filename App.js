@@ -8,7 +8,7 @@ import thunk from "redux-thunk";
 import reducer from "./reducers";
 import { Provider } from "react-redux";
 import { AsyncStorage } from "react-native";
-import { setLocalNotification } from "./utils/helpers";
+import { clearLocalNotification, setLocalNotification } from "./utils/helpers";
 
 // Components
 import DeckList from "./components/DeckList";
@@ -20,7 +20,10 @@ import Question from "./components/Question";
 
 const store = createStore(reducer, compose(applyMiddleware(thunk)));
 
+// Clearing decks and notifications for testing
+
 // AsyncStorage.removeItem("decks");
+// clearLocalNotification().then(setLocalNotification);
 AsyncStorage.removeItem("score");
 
 export default class App extends React.Component {
@@ -35,25 +38,15 @@ export default class App extends React.Component {
             JSON.stringify({
               list: [
                 {
-                  title: "React",
+                  title: "My first deck",
                   questions: [
                     {
-                      question: "What is React?",
-                      answer: "A library for managing user interfaces"
+                      question: "What's the best way to study?",
+                      answer: "Mobile flashcards of course!"
                     },
                     {
-                      question: "Where do you make Ajax requests in React?",
-                      answer: "The componentDidMount lifecycle event"
-                    }
-                  ]
-                },
-                {
-                  title: "JavaScript",
-                  questions: [
-                    {
-                      question: "What is a closure?",
-                      answer:
-                        "The combination of a function and the lexical environment within which that function was declared."
+                      question: "What creates the shadow of the moon?",
+                      answer: "The moon itself, NOT THE EARTH!"
                     }
                   ]
                 }

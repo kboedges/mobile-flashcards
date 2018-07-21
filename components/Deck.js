@@ -12,9 +12,6 @@ class Deck extends React.Component {
     this.props.navigation.navigate("NewQuestion", {
       deck: this.props.navigation.getParam("deck", "NO DECK")
     });
-    this.setState({
-      disabledButton: true
-    });
   };
 
   render() {

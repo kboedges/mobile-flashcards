@@ -1,7 +1,5 @@
 import { AsyncStorage } from "react-native";
-// import { SET_DECKS } from "../actionTypes";
 export const SET_DECKS = "SET_DECKS";
-
 export const FLASHCARDS_STORAGE_KEY = "decks";
 
 export function getDecks() {
@@ -41,8 +39,8 @@ export function addQuestion(deckTitle, questionInfo, decks) {
     return deck;
   });
   return dispatch =>
-    AsyncStorage.mergeItem("decks", JSON.stringify({ list }), () => {
-      AsyncStorage.getItem("decks", (err, results) => {
+    AsyncStorage.mergeItem(FLASHCARDS_STORAGE_KEY, JSON.stringify({ list }), () => {
+      AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY, (err, results) => {
         if (err) {
           console.log("Error", err);
         }

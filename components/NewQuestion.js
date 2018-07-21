@@ -1,7 +1,7 @@
 import React from "react";
 import { midGray } from "../utils/colors";
 import { connect } from "react-redux";
-import { View, StyleSheet, Text, TextInput, TouchableOpacity, KeyboardAvoidingView } from "react-native";
+import { StyleSheet, Text, TextInput, TouchableOpacity, KeyboardAvoidingView } from "react-native";
 
 // Actions
 import { addQuestion } from "../reducers/decks/actions";
@@ -59,11 +59,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10
   },
-  groupedContainer: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
-  },
   textInput: {
     height: 40,
     fontSize: 20,
@@ -73,12 +68,6 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
     paddingLeft: 10,
     paddingRight: 10
-  },
-  title: {
-    fontSize: 40,
-    paddingBottom: 10,
-    color: "black",
-    textAlign: "center"
   },
   button: {
     borderRadius: 5,

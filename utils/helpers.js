@@ -1,15 +1,13 @@
 import { AsyncStorage } from "react-native";
 import { Notifications, Permissions } from "expo";
 
-const NOTIFICATION_KEY = "mobile-flashcards";
-
 export function clearLocalNotification() {
-  return AsyncStorage.removeItem(NOTIFICATION_KEY).then(Notifications.cancelAllScheduledNotificationsAsync);
+  return AsyncStorage.removeItem("mobile-flashcards").then(Notifications.cancelAllScheduledNotificationsAsync);
 }
 
 function createNotification() {
   return {
-    title: "Review your flashcards!",
+    title: "Review your flashcards today",
     body: "Don't forget to review your flashcards today!",
     ios: {
       sound: true
@@ -24,7 +22,7 @@ function createNotification() {
 }
 
 export function setLocalNotification() {
-  AsyncStorage.getItem(NOTIFICATION_KEY)
+  AsyncStorage.getItem("mobile-flashcards")
     .then(JSON.parse)
     .then(data => {
       if (data === null) {
@@ -32,17 +30,17 @@ export function setLocalNotification() {
           if (status === "granted") {
             Notifications.cancelAllScheduledNotificationsAsync();
 
+            // Set the notification time for 5PM every day, starting tomorrow
             let tomorrow = new Date();
             tomorrow.setDate(tomorrow.getDate() + 1);
-            tomorrow.setHours(20);
-            tomorrow.setMinutes(0);
+            tomorrow.setHours(17, 0, 0);
 
             Notifications.scheduleLocalNotificationAsync(createNotification(), {
               time: tomorrow,
               repeat: "day"
             });
 
-            AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true));
+            AsyncStorage.setItem("mobile-flashcards", JSON.stringify(true));
           }
         });
       }
