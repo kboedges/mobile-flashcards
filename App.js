@@ -169,16 +169,15 @@ const Stack = createStackNavigator({
     })
   },
   Score: {
-    screen: Score
+    screen: Score,
+    navigationOptions: () => ({
+      header: null
+    })
   },
   Question: {
     screen: Question,
     navigationOptions: () => ({
-      headerStyle: {
-        backgroundColor: "black"
-      },
-      headerTintColor: "white",
-      headerBackTitle: "Back to Quiz"
+      header: null
     })
   }
 });

@@ -27,9 +27,8 @@ export function tallyScore(answerState) {
         if (answerState === true) {
           scoreObj.score++;
         } else if (answerState === false) {
-          scoreObj.score--;
+          scoreObj.score;
         }
-        console.log(scoreObj);
         AsyncStorage.setItem("score", JSON.stringify(scoreObj));
         return scoreObj;
       })
@@ -38,14 +37,16 @@ export function tallyScore(answerState) {
 
 export function clearScore() {
   return dispatch =>
-    AsyncStorage.removeItem("score", (err, result) => {
-      if (err) {
-        console.log("Error", err);
-      }
-      return result;
-    })
-      .then(JSON.parse)
-      .then(result => dispatch(setScore(result)));
+    AsyncStorage.mergeItem("score", JSON.stringify({ score: 0 }), () => {
+      AsyncStorage.getItem("score", (err, result) => {
+        if (err) {
+          console.log("Error", err);
+        }
+        return result;
+      })
+        .then(JSON.parse)
+        .then(result => dispatch(setScore(result)));
+    });
 }
 
 function setScore(score) {
