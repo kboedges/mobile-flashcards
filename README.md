@@ -20,6 +20,6 @@ Scan the QR code to open the app in [expo](https://expo.io/).
 
 ## Helpful Links
 
-- [Create React Native App](https://github.com/react-community/create-react-native-app).
+- [Create React Native App](https://github.com/react-community/create-react-native-app)
 - [React Navigation](https://reactnavigation.org/)
 - [Redux](https://redux.js.org/)
