@@ -1,13 +1,15 @@
 import { AsyncStorage } from "react-native";
 import { clearLocalNotification, setLocalNotification } from "./helpers";
+import { FLASHCARDS_STORAGE_KEY } from "../reducers/decks/actions";
+import { SCORE_STORAGE_KEY } from "../reducers/score/actions";
 
 export function initialLoadDecks() {
-  AsyncStorage.getItem("decks")
+  AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY)
     .then(JSON.parse)
     .then(data => {
       if (data === null) {
         AsyncStorage.setItem(
-          "decks",
+          FLASHCARDS_STORAGE_KEY,
           JSON.stringify({
             list: [
               {
@@ -31,13 +33,13 @@ export function initialLoadDecks() {
 }
 
 export function initialLoadScore() {
-  AsyncStorage.getItem("score")
+  AsyncStorage.getItem(SCORE_STORAGE_KEY)
     .then(JSON.parse)
     .then(data => {
       if (data === null) {
-        AsyncStorage.setItem("score", JSON.stringify({ score: 0 }));
+        AsyncStorage.setItem(SCORE_STORAGE_KEY, JSON.stringify({ score: 0 }));
       } else {
-        AsyncStorage.mergeItem("score", JSON.stringify({ score: 0 }));
+        AsyncStorage.mergeItem(SCORE_STORAGE_KEY, JSON.stringify({ score: 0 }));
       }
     });
 }
@@ -45,6 +47,6 @@ export function initialLoadScore() {
 // Clearing decks and notifications for testing
 
 export function clearAllTesting() {
-  AsyncStorage.removeItem("decks");
+  AsyncStorage.removeItem(FLASHCARDS_STORAGE_KEY);
   clearLocalNotification().then(setLocalNotification);
 }
