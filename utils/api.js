@@ -1,5 +1,5 @@
 import { AsyncStorage } from "react-native";
-import { clearLocalNotification, setLocalNotification } from "./utils/helpers";
+import { clearLocalNotification, setLocalNotification } from "./helpers";
 
 export function initialLoadDecks() {
   AsyncStorage.getItem("decks")
