@@ -32,7 +32,7 @@ class Deck extends React.Component {
             <Text style={[styles.buttonText, { color: "black" }]}>Add Card</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={() => this.startQuiz(deck)}>
-            <Text style={[styles.buttonText, { color: "#fff" }]}>Start Quiz</Text>
+            <Text style={[styles.buttonText, { color: "white" }]}>Start Quiz</Text>
           </TouchableOpacity>
         </View>
       </View>

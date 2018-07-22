@@ -7,8 +7,8 @@ import { createStore, compose, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import reducer from "./reducers";
 import { Provider } from "react-redux";
-import { AsyncStorage } from "react-native";
-import { clearLocalNotification, setLocalNotification } from "./utils/helpers";
+import { setLocalNotification } from "./utils/helpers";
+import { initialLoadDecks, initialLoadScore, clearAllTesting } from "./utils/api";
 
 // Components
 import DeckList from "./components/DeckList";
@@ -20,53 +20,12 @@ import Question from "./components/Question";
 
 const store = createStore(reducer, compose(applyMiddleware(thunk)));
 
-// Clearing decks and notifications for testing
-
-// AsyncStorage.removeItem("decks");
-// clearLocalNotification().then(setLocalNotification);
-AsyncStorage.removeItem("score");
-
 export default class App extends React.Component {
   componentDidMount() {
     setLocalNotification();
-    AsyncStorage.getItem("decks")
-      .then(JSON.parse)
-      .then(data => {
-        if (data === null) {
-          AsyncStorage.setItem(
-            "decks",
-            JSON.stringify({
-              list: [
-                {
-                  title: "My first deck",
-                  questions: [
-                    {
-                      question: "What's the best way to study?",
-                      answer: "Mobile flashcards of course!"
-                    },
-                    {
-                      question: "What color is the sky (usually...)",
-                      answer: "Blue"
-                    }
-                  ]
-                }
-              ]
-            })
-          );
-        }
-      });
-    AsyncStorage.getItem("score")
-      .then(JSON.parse)
-      .then(data => {
-        if (data === null) {
-          AsyncStorage.setItem(
-            "score",
-            JSON.stringify({
-              score: 0
-            })
-          );
-        }
-      });
+    initialLoadDecks();
+    initialLoadScore();
+    // clearAllTesting();
   }
 
   render() {

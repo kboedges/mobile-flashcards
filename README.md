@@ -2,7 +2,7 @@
 
 This app was created as the 3rd project for the React Udacity Nanodegree. It allows a user to create flashcard decks and quiz themselves. The app will send a notification if the user has not completed a quiz that day.
 
-This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
+This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app). I developed and tested this project using iOS.
 
 ## Installation & Setup
 
