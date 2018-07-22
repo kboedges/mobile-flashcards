@@ -6,8 +6,8 @@ import { SCORE_STORAGE_KEY } from "../reducers/score/actions";
 export function initialLoadDecks() {
   AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY)
     .then(JSON.parse)
-    .then(data => {
-      if (data === null) {
+    .then(result => {
+      if (result === null) {
         AsyncStorage.setItem(
           FLASHCARDS_STORAGE_KEY,
           JSON.stringify({
@@ -35,8 +35,8 @@ export function initialLoadDecks() {
 export function initialLoadScore() {
   AsyncStorage.getItem(SCORE_STORAGE_KEY)
     .then(JSON.parse)
-    .then(data => {
-      if (data === null) {
+    .then(result => {
+      if (result === null) {
         AsyncStorage.setItem(SCORE_STORAGE_KEY, JSON.stringify({ score: 0 }));
       } else {
         AsyncStorage.mergeItem(SCORE_STORAGE_KEY, JSON.stringify({ score: 0 }));

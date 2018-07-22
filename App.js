@@ -13,10 +13,10 @@ const store = createStore(reducer, compose(applyMiddleware(thunk)));
 
 export default class App extends React.Component {
   componentDidMount() {
+    // clearAllTesting();
     setLocalNotification();
     initialLoadDecks();
     initialLoadScore();
-    // clearAllTesting();
   }
 
   render() {

@@ -11,7 +11,8 @@ class NewQuestion extends React.Component {
     super(props);
     this.state = {
       question: "",
-      answer: ""
+      answer: "",
+      disabledButton: true
     };
   }
 
@@ -25,24 +26,54 @@ class NewQuestion extends React.Component {
     });
   };
 
+  onQuestionChange = text => {
+    this.setState(
+      {
+        question: text
+      },
+      () => this.validateButton()
+    );
+  };
+
+  onAnswerChange = text => {
+    this.setState(
+      {
+        answer: text
+      },
+      () => this.validateButton()
+    );
+  };
+
+  validateButton = () => {
+    if (this.state.question.length && this.state.answer.length > 0) {
+      this.setState({ disabledButton: false });
+    } else {
+      this.setState({ disabledButton: true });
+    }
+  };
+
   render() {
     return (
       <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
         <TextInput
           style={styles.textInput}
-          onChangeText={question => this.setState({ question })}
+          onChangeText={this.onQuestionChange}
           value={this.state.question}
           placeholder="Card question"
           placeholderTextColor={midGray}
         />
         <TextInput
           style={styles.textInput}
-          onChangeText={answer => this.setState({ answer })}
+          onChangeText={this.onAnswerChange}
           value={this.state.answer}
           placeholder="Card answer"
           placeholderTextColor={midGray}
         />
-        <TouchableOpacity style={styles.button} onPress={() => this.onPress(this.state.text)}>
+        <TouchableOpacity
+          style={styles.button}
+          disabled={this.state.disabledButton}
+          onPress={() => this.onPress(this.state.text)}
+        >
           <Text style={[styles.buttonText, { color: "white" }]}>Submit</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>

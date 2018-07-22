@@ -36,7 +36,9 @@ class Question extends React.Component {
           index: index + 1
         });
       } else {
-        this.props.navigation.push("Score");
+        this.props.navigation.push("Score", {
+          deck: deck
+        });
       }
     });
   };
@@ -50,6 +52,9 @@ class Question extends React.Component {
       <View style={styles.container}>
         {currentDeck.questions[index] !== undefined ? (
           <View>
+            <Text style={{ paddingTop: 10, fontWeight: "bold" }}>
+              {index}/{currentDeck.questions.length}
+            </Text>
             {this.state.answerShowing === false ? (
               <View style={styles.groupedContainer}>
                 <Text style={styles.title}>{currentDeck.questions[index].question}</Text>

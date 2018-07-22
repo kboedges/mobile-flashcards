@@ -7,8 +7,17 @@ import { midGray } from "../utils/colors";
 import { getDecks } from "../reducers/decks/actions";
 
 class DeckList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true
+    };
+  }
+
   componentDidMount() {
-    this.props.getDecks();
+    this.props.getDecks().then(() => {
+      this.setState({ loading: false });
+    });
   }
 
   onPress = item => {
@@ -16,20 +25,26 @@ class DeckList extends React.Component {
   };
 
   render() {
+    const { decks } = this.props;
+
     return (
       <View style={styles.container}>
-        <FlatList
-          data={this.props.decks.list}
-          keyExtractor={item => item.title}
-          renderItem={({ item }) => (
-            <TouchableOpacity key={item.key} style={styles.deckButton} onPress={() => this.onPress(item)}>
-              <Text style={styles.deckTitle}>{item.title}</Text>
-              <Text style={styles.deckCardNum}>
-                {item.questions.length} {item.questions.length === 1 ? "Card" : "Cards"}
-              </Text>
-            </TouchableOpacity>
-          )}
-        />
+        {this.state.loading !== true ? (
+          <FlatList
+            data={decks && decks.list}
+            keyExtractor={item => item.title}
+            renderItem={({ item }) => (
+              <TouchableOpacity key={item.key} style={styles.deckButton} onPress={() => this.onPress(item)}>
+                <Text style={styles.deckTitle}>{item.title}</Text>
+                <Text style={styles.deckCardNum}>
+                  {item.questions.length} {item.questions.length === 1 ? "Card" : "Cards"}
+                </Text>
+              </TouchableOpacity>
+            )}
+          />
+        ) : (
+          <Text style={{ textAlign: "center" }}>Loading...</Text>
+        )}
       </View>
     );
   }
