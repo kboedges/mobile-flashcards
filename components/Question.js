@@ -53,7 +53,7 @@ class Question extends React.Component {
         {currentDeck.questions[index] !== undefined ? (
           <View>
             <Text style={{ paddingTop: 10, fontWeight: "bold" }}>
-              {index}/{currentDeck.questions.length}
+              {index + 1}/{currentDeck.questions.length}
             </Text>
             {this.state.answerShowing === false ? (
               <View style={styles.groupedContainer}>
