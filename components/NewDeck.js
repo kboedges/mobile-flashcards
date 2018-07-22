@@ -9,12 +9,31 @@ import { addDeck, getDecks } from "../reducers/decks/actions";
 class NewDeck extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { text: "" };
+    this.state = {
+      text: "",
+      disabledButton: true
+    };
   }
 
   onPress = newDeckTitle => {
-    this.props.addDeck(newDeckTitle).then(this.props.navigation.navigate("DeckList"));
-    this.setState({ text: "" });
+    this.props.addDeck(newDeckTitle).then(() => {
+      this.props.decks.list.map(deck => {
+        console.log(deck.title === newDeckTitle);
+        if (deck.title === newDeckTitle) {
+          this.props.navigation.navigate("Deck", { deck });
+        }
+      });
+      this.setState({ text: "" });
+    });
+  };
+
+  onInputChange = text => {
+    this.setState({ text });
+    if (text.length > 0) {
+      this.setState({ disabledButton: false });
+    } else {
+      this.setState({ disabledButton: true });
+    }
   };
 
   render() {
@@ -23,12 +42,16 @@ class NewDeck extends React.Component {
         <Text style={styles.title}>What is the title of your new deck?</Text>
         <TextInput
           style={styles.textInput}
-          onChangeText={text => this.setState({ text })}
+          onChangeText={this.onInputChange}
           value={this.state.text}
           placeholder="Deck title"
           placeholderTextColor={midGray}
         />
-        <TouchableOpacity style={styles.button} onPress={() => this.onPress(this.state.text)}>
+        <TouchableOpacity
+          style={styles.button}
+          disabled={this.state.disabledButton}
+          onPress={() => this.onPress(this.state.text)}
+        >
           <Text style={[styles.buttonText, { color: "white" }]}>Submit</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
