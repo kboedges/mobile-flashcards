@@ -23,3 +23,26 @@ Scan the QR code to open the app in [expo](https://expo.io/).
 - [Create React Native App](https://github.com/react-community/create-react-native-app)
 - [React Navigation](https://reactnavigation.org/)
 - [Redux](https://redux.js.org/)
+
+## Screenshots (iOS)
+
+All decks view
+![All decks view](/screenshots/01.png)
+
+Individual deck view
+![Individual deck view](/screenshots/02.png)
+
+Add new card to deck
+![Add new card to deck](/screenshots/03.png)
+
+Quiz card question
+![Quiz card question](/screenshots/04.png)
+
+Quiz card answer
+![Quiz card answer](/screenshots/05.png)
+
+Quiz score
+![Quiz score](/screenshots/06.png)
+
+Add new deck
+![Add new deck](/screenshots/07.png)
