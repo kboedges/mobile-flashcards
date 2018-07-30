@@ -27,22 +27,29 @@ Scan the QR code to open the app in [expo](https://expo.io/).
 ## Screenshots (iOS)
 
 All decks view
+
 ![All decks view](/screenshots/01.PNG)
 
 Individual deck view
+
 ![Individual deck view](/screenshots/02.PNG)
 
 Add new card to deck
+
 ![Add new card to deck](/screenshots/03.PNG)
 
 Quiz card question
+
 ![Quiz card question](/screenshots/04.PNG)
 
 Quiz card answer
+
 ![Quiz card answer](/screenshots/05.PNG)
 
 Quiz score
+
 ![Quiz score](/screenshots/06.PNG)
 
 Add new deck
+
 ![Add new deck](/screenshots/07.PNG)
